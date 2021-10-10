@@ -1,7 +1,9 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 const AppPage = () => {
-  return <div>home</div>
+  const { t } = useTranslation()
+  return <div>{t('name')}</div>
 }
 
 export default AppPage
