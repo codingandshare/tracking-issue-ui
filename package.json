@@ -48,7 +48,7 @@
     "webpack-dev-server": "^4.3.1"
   },
   "scripts": {
-    "start": "webpack serve --progress --mode development --open --content-base src --hot --inline",
+    "start": "webpack serve --mode development --hot --progress --static --open",
     "build": "rm -rf build && webpack --config webpack.config-prod.js --mode production",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "prepare": "husky install"
