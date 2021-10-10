@@ -15,7 +15,6 @@
     "react-i18next": "^11.11.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "terser-webpack-plugin": "^5.2.4",
     "web-vitals": "^2.1.1"
   },
   "devDependencies": {
@@ -33,12 +32,15 @@
     "dotenv": "^10.0.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",
+    "husky": "^7.0.0",
     "mini-css-extract-plugin": "^2.1.0",
+    "prettier": "^2.4.1",
+    "pretty-quick": "^3.1.1",
     "sass": "^1.35.2",
     "sass-loader": "^12.1.0",
     "source-map-loader": "^3.0.0",
     "style-loader": "^3.0.0",
-    "uglifyjs-webpack-plugin": "^2.2.0",
+    "terser-webpack-plugin": "^5.2.4",
     "url-loader": "^4.1.1",
     "webpack": "^5.44.0",
     "webpack-bundle-analyzer": "^4.4.2",
@@ -47,13 +49,14 @@
   },
   "scripts": {
     "start": "webpack serve --progress --mode development --open --content-base src --hot --inline",
-    "build": "rm -rf build && webpack --config webpack.config-prod.js --mode production"
+    "build": "rm -rf build && webpack --config webpack.config-prod.js --mode production",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "prepare": "husky install"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "format && git add ."
+    }
   },
   "browserslist": {
     "production": [
