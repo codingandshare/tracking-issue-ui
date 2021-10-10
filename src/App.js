@@ -1,15 +1,12 @@
 import React from 'react'
+import AppRouter from 'routers/AppRouter'
+import { AppProvider } from './contexts/app.context'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>Tracking App</p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppProvider>
+      <AppRouter />
+    </AppProvider>
   )
 }
 

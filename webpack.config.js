@@ -74,10 +74,7 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    disableHostCheck: true,
     port: 3000,
-    contentBase: ['/src/', './public'],
-    inline: true,
     hot: true,
     liveReload: true,
     proxy: {
