@@ -1,4 +1,4 @@
-import React, { useContext, Suspense } from 'react'
+import React, { useContext, Suspense, useEffect } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Layout, Breadcrumb } from 'antd'
@@ -12,13 +12,28 @@ const { Content, Footer } = Layout
 
 const AppPage = () => {
   const { t } = useTranslation()
-  const { user, isShowVersionModal, versions, setIsShowVersionModal, onSelectVersion, version } = useContext(AppContext)
+  const {
+    user,
+    isSignIned,
+    isShowVersionModal,
+    versions,
+    setIsShowVersionModal,
+    onSelectVersion,
+    version,
+    showVersionModal
+  } = useContext(AppContext)
   const role = 'ROLE_ADMIN'
   const location = useLocation()
   const routers = URL_PERMISSIONS[role]
   const menus = filter(routers, (it) => it.name)
   const activeIndex = findIndex(routers, (it) => it.path === location.pathname)
   const activeMenu = activeIndex >= 0 ? routers[activeIndex] : null
+
+  useEffect(() => {
+    if (isSignIned) {
+      showVersionModal()
+    }
+  }, [isSignIned])
 
   return (
     <Layout>
