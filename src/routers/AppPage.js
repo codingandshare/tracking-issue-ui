@@ -7,11 +7,12 @@ import AppHeader from 'components/AppHeader'
 import { useLocation } from 'react-router'
 import { findIndex, map, filter } from 'common/func.utils'
 import { URL_PERMISSIONS } from 'common/role.const'
+import VersionModal from 'components/VersionModal'
 const { Content, Footer } = Layout
 
 const AppPage = () => {
   const { t } = useTranslation()
-  const { user } = useContext(AppContext)
+  const { user, isShowVersionModal, versions, setIsShowVersionModal, onSelectVersion, version } = useContext(AppContext)
   const role = 'ROLE_ADMIN'
   const location = useLocation()
   const routers = URL_PERMISSIONS[role]
@@ -48,6 +49,13 @@ const AppPage = () => {
           </Suspense>
         </div>
       </Content>
+      <VersionModal
+        isShow={isShowVersionModal}
+        versions={versions}
+        onSelect={onSelectVersion}
+        version={version}
+        onClose={() => setIsShowVersionModal(false)}
+      />
       <Footer style={{ textAlign: 'center' }}>Tracking Issues ©2021 Created by codingandshare</Footer>
     </Layout>
   )
