@@ -20,7 +20,7 @@ const AppPage = () => {
     setIsShowVersionModal,
     onSelectVersion,
     version,
-    showVersionModal
+    loadVersionModal
   } = useContext(AppContext)
   const role = 'ROLE_ADMIN'
   const location = useLocation()
@@ -31,7 +31,7 @@ const AppPage = () => {
 
   useEffect(() => {
     if (isSignIned) {
-      showVersionModal()
+      loadVersionModal()
     }
   }, [isSignIned])
 

@@ -16,18 +16,22 @@ const VersionContext = () => {
     setVersion(ver)
   }
 
-  const showVersionModal = () => {
+  const loadVersionModal = () => {
     const ver = getVersion()
     if (ver) {
       setVersion(ver)
     } else {
-      setIsShowVersionModal(true)
-      getVersions()
-        .then((res) => {
-          setVersions(res)
-        })
-        .catch(showError)
+      showVersionModal()
     }
+  }
+
+  const showVersionModal = () => {
+    setIsShowVersionModal(true)
+    getVersions()
+      .then((res) => {
+        setVersions(res)
+      })
+      .catch(showError)
   }
 
   return {
@@ -36,7 +40,8 @@ const VersionContext = () => {
     version,
     versions,
     onSelectVersion,
-    showVersionModal
+    showVersionModal,
+    loadVersionModal
   }
 }
 
