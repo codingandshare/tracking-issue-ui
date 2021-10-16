@@ -12,7 +12,7 @@ const Login = () => {
     <div id="login-page">
       <Row gutter={24}>
         <Col span={24}>
-          <Card title={t('Login to Tracking Issues')}>
+          <Card hoverable title={t('Login to Tracking Issues')}>
             <Form name="loginForm" autoComplete="off" layout="vertical" onFinish={onLogin} form={form}>
               <Form.Item
                 label={t('Username')}

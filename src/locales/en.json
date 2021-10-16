@@ -31,5 +31,9 @@
   "Please confirm your password": "Please confirm your password",
   "The two passwords that you entered do not match": "The two passwords that you entered do not match",
   "Update user successfully": "Update user successfully",
-  "Change password successfully": "Change password successfully"
+  "Change password successfully": "Change password successfully",
+  "Select": "Select",
+  "Cancel": "Cancel",
+  "Version": "Version",
+  "Select version": "Select version"
 }

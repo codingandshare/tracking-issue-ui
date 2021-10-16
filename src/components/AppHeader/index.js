@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Layout, Menu, Avatar, Dropdown } from 'antd'
-import { LogoutOutlined, UserOutlined } from '@ant-design/icons'
+import { LogoutOutlined, UserOutlined, BranchesOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import { AppContext } from 'contexts/app.context'
 import { map, get } from 'common/func.utils'
@@ -12,7 +12,7 @@ const AppHeader = (props) => {
   const { menus, active } = props
   const history = useHistory()
   const { t } = useTranslation()
-  const { user, onLogout } = useContext(AppContext)
+  const { user, onLogout, showVersionModal } = useContext(AppContext)
 
   const onNav = (menu) => {
     history.push(menu.path)
@@ -33,7 +33,11 @@ const AppHeader = (props) => {
         {t('User Info')}
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item icon={React.createElement(LogoutOutlined)} key="1" onClick={onUserLoginOut}>
+      <Menu.Item icon={React.createElement(BranchesOutlined)} key="1" onClick={showVersionModal}>
+        {t('Select version')}
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item icon={React.createElement(LogoutOutlined)} key="2" onClick={onUserLoginOut}>
         {t('Logout')}
       </Menu.Item>
     </Menu>
