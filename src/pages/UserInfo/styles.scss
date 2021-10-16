@@ -1,0 +1,11 @@
+#user-info-page {
+  .row-info {
+    display: flex;
+    flex-direction: row;
+    .label-col {
+      width: 20%;
+      margin-right: 40px;
+    }
+  }
+  
+}
