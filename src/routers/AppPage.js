@@ -1,23 +1,23 @@
-import React, { useContext, Suspense, lazy } from 'react'
+import React, { useContext, Suspense } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Layout, Breadcrumb } from 'antd'
-import getMenusFromRole from 'common/menu.const'
 import { AppContext } from 'contexts/app.context'
 import AppHeader from 'components/AppHeader'
 import { useLocation } from 'react-router'
-import { find, findIndex, map } from 'common/func.utils'
-const Tracking = lazy(() => import('pages/Tracking'))
-const Users = lazy(() => import('pages/Users'))
+import { findIndex, map, filter } from 'common/func.utils'
+import { URL_PERMISSIONS } from 'common/role.const'
 const { Content, Footer } = Layout
 
 const AppPage = () => {
   const { t } = useTranslation()
   const { user } = useContext(AppContext)
+  const role = 'ROLE_ADMIN'
   const location = useLocation()
-  const menus = getMenusFromRole('ROLE_ADMIN')
-  const activeIndex = findIndex(menus, (it) => it.path === location.pathname)
-  const activeMenu = menus[activeIndex]
+  const routers = URL_PERMISSIONS[role]
+  const menus = filter(routers, (it) => it.name)
+  const activeIndex = findIndex(routers, (it) => it.path === location.pathname)
+  const activeMenu = activeIndex >= 0 ? routers[activeIndex] : null
 
   return (
     <Layout>
@@ -40,8 +40,10 @@ const AppPage = () => {
                   return <Redirect to="/app/tracking" />
                 }}
               />
-              <Route path="/app/tracking" component={Tracking} />
-              <Route path="/app/users" component={Users} />
+              {routers &&
+                map(routers, (it, index) => {
+                  return <Route path={it.path} component={it.component} key={index} />
+                })}
             </Switch>
           </Suspense>
         </div>

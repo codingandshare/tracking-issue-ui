@@ -1,6 +1,6 @@
 import axios from 'axios/lib/axios'
-import { getToken, clearLogin } from './storage.service'
-import { isNil, get } from 'common/func.utils'
+import { getToken } from './storage.service'
+import { isNil } from 'common/func.utils'
 
 const RestClient = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
