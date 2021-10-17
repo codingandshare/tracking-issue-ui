@@ -35,5 +35,10 @@
   "Select": "Select",
   "Cancel": "Cancel",
   "Version": "Version",
-  "Select version": "Select version"
+  "Select version": "Select version",
+  "New issue": "New issue",
+  "Short description": "Short description",
+  "Status": "Status",
+  "Severity": "Severity",
+  "Filter": "Filter"
 }

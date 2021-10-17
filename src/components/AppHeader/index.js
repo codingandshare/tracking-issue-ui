@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useCallback, useContext, useMemo } from 'react'
 import { Layout, Menu, Avatar, Dropdown } from 'antd'
 import { LogoutOutlined, UserOutlined, BranchesOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
@@ -14,18 +14,18 @@ const AppHeader = (props) => {
   const { t } = useTranslation()
   const { user, onLogout, showVersionModal } = useContext(AppContext)
 
-  const onNav = (menu) => {
+  const onNav = useCallback((menu) => {
     history.push(menu.path)
-  }
+  }, [])
 
-  const onUserInfo = () => {
+  const onUserInfo = useCallback(() => {
     history.push('/app/user-info')
-  }
+  }, [])
 
-  const onUserLoginOut = () => {
+  const onUserLoginOut = useCallback(() => {
     onLogout()
     history.push('/authen')
-  }
+  }, [])
 
   const menu = (
     <Menu>
@@ -55,12 +55,16 @@ const AppHeader = (props) => {
     }
   }
 
+  const shortName = useMemo(() => {
+    return getShortName()
+  }, [user.firstName, user.lastName, user.username])
+
   return (
     <Header id="app-header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
       <div className="logo" />
       <Dropdown overlay={menu} placement="bottomCenter" trigger={['click']}>
         <Avatar color={'#7265e6'} className="app-avatar" size="large">
-          {getShortName()}
+          {shortName}
         </Avatar>
       </Dropdown>
       <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[`${active}`]} selectedKeys={[`${active}`]}>
@@ -76,4 +80,4 @@ const AppHeader = (props) => {
   )
 }
 
-export default AppHeader
+export default React.memo(AppHeader)

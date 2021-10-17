@@ -1,4 +1,4 @@
-import React, { useContext, Suspense, useEffect } from 'react'
+import React, { useContext, Suspense, useEffect, useCallback } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Layout, Breadcrumb } from 'antd'
@@ -35,6 +35,10 @@ const AppPage = () => {
     }
   }, [isSignIned])
 
+  const onCloseModalVersion = useCallback(() => {
+    setIsShowVersionModal(false)
+  }, [])
+
   return (
     <Layout>
       <AppHeader menus={menus} active={activeIndex} />
@@ -69,7 +73,7 @@ const AppPage = () => {
         versions={versions}
         onSelect={onSelectVersion}
         version={version}
-        onClose={() => setIsShowVersionModal(false)}
+        onClose={onCloseModalVersion}
       />
       <Footer style={{ textAlign: 'center' }}>Tracking Issues ©2021 Created by codingandshare</Footer>
     </Layout>
