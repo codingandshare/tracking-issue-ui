@@ -19,6 +19,8 @@ const VersionModal = (props) => {
     }
   }, [version, isShow])
 
+  console.log('render VersionModal')
+
   return (
     <Modal
       title={t('Select version')}
@@ -59,4 +61,4 @@ const VersionModal = (props) => {
   )
 }
 
-export default VersionModal
+export default React.memo(VersionModal)
