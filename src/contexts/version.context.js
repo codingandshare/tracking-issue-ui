@@ -9,12 +9,15 @@ const VersionContext = () => {
   const [versions, setVersions] = useState([])
   const [version, setVersion] = useState(getVersion())
 
-  const onSelectVersion = useCallback((formData) => {
-    setIsShowVersionModal(false)
-    const ver = find(versions, (it) => it.id === formData.version)
-    storeVersion(ver)
-    setVersion(ver)
-  }, [])
+  const onSelectVersion = useCallback(
+    (formData) => {
+      setIsShowVersionModal(false)
+      const ver = find(versions, (it) => it.id === formData.version)
+      storeVersion(ver)
+      setVersion(ver)
+    },
+    [versions]
+  )
 
   const loadVersionModal = useCallback(() => {
     const ver = getVersion()

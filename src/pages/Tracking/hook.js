@@ -120,7 +120,7 @@ const TrackingHook = () => {
         showError(error)
         setTrackingData({ ...trackingData, loading: false })
       })
-  }, [pagination])
+  }, [pagination, version])
 
   const onFilter = useCallback((filterData) => {
     setPagination({ ...pagination, filterData })
@@ -140,8 +140,10 @@ const TrackingHook = () => {
   }, [])
 
   useEffect(() => {
-    loadIssues()
-  }, [pagination])
+    if (version) {
+      loadIssues()
+    }
+  }, [pagination, version])
 
   return {
     onFilter,

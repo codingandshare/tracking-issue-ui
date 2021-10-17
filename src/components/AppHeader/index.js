@@ -57,7 +57,7 @@ const AppHeader = (props) => {
 
   const shortName = useMemo(() => {
     return getShortName()
-  }, [user.firstName, user.lastName, user.username])
+  }, [user])
 
   return (
     <Header id="app-header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>

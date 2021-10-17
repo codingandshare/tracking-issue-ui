@@ -12,7 +12,7 @@ const Tracking = () => {
   return (
     <Row gutter={24} id="tracking-list-page">
       <Col span={24}>
-        <TrackingFilter onAdd={onAdd} title={version.version} onFilter={onFilter} filterData={metaData} />
+        <TrackingFilter onAdd={onAdd} title={version?.version} onFilter={onFilter} filterData={metaData} />
       </Col>
       <Col span={24}>
         <div className="lb-total">
