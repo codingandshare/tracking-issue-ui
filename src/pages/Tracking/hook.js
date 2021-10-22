@@ -2,10 +2,11 @@ import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useHistory } from 'react-router'
 import { AppContext } from 'contexts/app.context'
 import { useTranslation } from 'react-i18next'
-import { fetchIssues } from 'services/tracking.service'
+import { fetchIssueHistories, fetchIssues } from 'services/tracking.service'
 import { forEach } from 'common/func.utils'
 import { showError } from 'common/notify.utils'
 import moment from 'moment'
+import { Button } from 'antd'
 
 const TrackingHook = () => {
   const history = useHistory()
@@ -73,6 +74,19 @@ const TrackingHook = () => {
         render: (col) => {
           return moment(col).local().fromNow()
         }
+      },
+      {
+        title: t('Actions'),
+        key: 'actionkey',
+        width: '10%',
+        sorter: false,
+        render: (col, colData) => {
+          return (
+            <Button onClick={() => onShowHistoryModal(colData.id)} size={'small'}>
+              {t('History')}
+            </Button>
+          )
+        }
       }
     ]
   }, [t])
@@ -95,6 +109,9 @@ const TrackingHook = () => {
     },
     loading: false
   })
+
+  const [isShowHistoryModal, setIsShowHistoryModal] = useState(false)
+  const [histories, setHistories] = useState([])
 
   const loadIssues = useCallback(() => {
     const params = {
@@ -145,13 +162,31 @@ const TrackingHook = () => {
     }
   }, [pagination, version])
 
+  const onCloseHistoryModal = useCallback(() => {
+    setIsShowHistoryModal(false)
+  }, [])
+
+  const onShowHistoryModal = useCallback((issueId) => {
+    setIsShowHistoryModal(true)
+    setHistories([])
+    fetchIssueHistories(issueId)
+      .then((res) => {
+        console.log(res)
+        setHistories(res)
+      })
+      .catch(showError)
+  }, [])
+
   return {
     onFilter,
     onAdd,
     version,
     metaData,
     trackingData,
-    onChangeTable
+    onChangeTable,
+    onCloseHistoryModal,
+    isShowHistoryModal,
+    histories
   }
 }
 

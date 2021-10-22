@@ -40,5 +40,7 @@
   "Short description": "Short description",
   "Status": "Status",
   "Severity": "Severity",
-  "Filter": "Filter"
+  "Filter": "Filter",
+  "History for": "History for",
+  "Total issues": "Total issues"
 }

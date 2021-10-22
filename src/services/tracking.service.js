@@ -14,3 +14,11 @@ export const fetchIssues = async (params) => {
     throw get(error, ['response', 'data', 'message'], error.message)
   }
 }
+
+export const fetchIssueHistories = async (issueId) => {
+  try {
+    return (await RestClient.get(`/tracking/issue/${issueId}/histories`)).data
+  } catch (error) {
+    throw get(error, ['response', 'data', 'message'], error.message)
+  }
+}

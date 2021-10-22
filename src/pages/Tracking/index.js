@@ -3,10 +3,23 @@ import { Row, Col } from 'antd'
 import TrackingFilter from 'components/TrackingFilter'
 import TrackingHook from './hook'
 import AppTable from 'components/AppTable'
+import HistoryModal from 'components/HistoryModal'
+import { useTranslation } from 'react-i18next'
 import './styles'
 
 const Tracking = () => {
-  const { onFilter, onAdd, version, metaData, trackingData, onChangeTable } = TrackingHook()
+  const { t } = useTranslation()
+  const {
+    onFilter,
+    onAdd,
+    version,
+    metaData,
+    trackingData,
+    onChangeTable,
+    onCloseHistoryModal,
+    isShowHistoryModal,
+    histories
+  } = TrackingHook()
 
   console.log('Render page tracking')
   return (
@@ -16,12 +29,13 @@ const Tracking = () => {
       </Col>
       <Col span={24}>
         <div className="lb-total">
-          <strong>Total issues:</strong>&nbsp;&nbsp;{trackingData.pagination.total}
+          <strong>{t('Total issues')}:</strong>&nbsp;&nbsp;{trackingData.pagination.total}
         </div>
       </Col>
       <Col span={24}>
         <AppTable tableData={trackingData} onChangeTable={onChangeTable} />
       </Col>
+      <HistoryModal histories={histories} isVisible={isShowHistoryModal} onClose={onCloseHistoryModal} />
     </Row>
   )
 }
