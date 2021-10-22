@@ -5,9 +5,10 @@ const AppTable = ({ tableData, onChangeTable }) => {
   console.log('render AppTable')
 
   const pagination = useMemo(() => {
-    return { ...tableData.pagination, position: ['bottomCenter'] }
+    return tableData.pagination ? { ...tableData.pagination, position: ['bottomCenter'] } : false
   }, [tableData.pagination])
 
+  console.log(pagination)
   return (
     <Table
       columns={tableData.columns}
