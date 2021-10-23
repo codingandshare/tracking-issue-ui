@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { fetchIssueHistories, fetchIssues } from 'services/tracking.service'
 import { forEach } from 'common/func.utils'
 import { showError } from 'common/notify.utils'
+import { PAGE_SIZE } from 'common/app.const'
 import moment from 'moment'
 import { Button } from 'antd'
 
@@ -104,7 +105,7 @@ const TrackingHook = () => {
     data: [],
     pagination: {
       current: 1,
-      pageSize: 10,
+      pageSize: PAGE_SIZE,
       total: 0
     },
     loading: false
@@ -116,7 +117,7 @@ const TrackingHook = () => {
   const loadIssues = useCallback(() => {
     const params = {
       page: pagination.current - 1,
-      pageSize: pagination.pageSize,
+      size: pagination.pageSize,
       versionId: version.id,
       sort: pagination.sort
     }
@@ -171,7 +172,6 @@ const TrackingHook = () => {
     setHistories([])
     fetchIssueHistories(issueId)
       .then((res) => {
-        console.log(res)
         setHistories(res)
       })
       .catch(showError)

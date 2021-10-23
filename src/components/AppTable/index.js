@@ -8,10 +8,13 @@ const AppTable = ({ tableData, onChangeTable }) => {
     return tableData.pagination ? { ...tableData.pagination, position: ['bottomCenter'] } : false
   }, [tableData.pagination])
 
-  console.log(pagination)
+  const columns = useMemo(() => {
+    return tableData.columns
+  }, [tableData.columns])
+
   return (
     <Table
-      columns={tableData.columns}
+      columns={columns}
       rowKey={(record) => record.id}
       loading={tableData.loading}
       onChange={onChangeTable}

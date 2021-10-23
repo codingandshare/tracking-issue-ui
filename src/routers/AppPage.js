@@ -6,7 +6,7 @@ import { AppContext } from 'contexts/app.context'
 import AppHeader from 'components/AppHeader'
 import { useLocation } from 'react-router'
 import { findIndex, map, filter } from 'common/func.utils'
-import { URL_PERMISSIONS } from 'common/role.const'
+import { URL_PERMISSIONS } from 'routers/route.config'
 import VersionModal from 'components/VersionModal'
 const { Content, Footer } = Layout
 
