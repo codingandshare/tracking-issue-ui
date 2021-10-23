@@ -48,19 +48,6 @@ const UserContext = () => {
     }
   }, [getToken])
 
-  useEffect(() => {
-    if (isSignIned) {
-      fetchMetaDataInfo().then((responses) => {
-        const userData = responses[0].data
-        const metaData = responses[1].data
-        setMetaData({
-          users: userData,
-          metas: metaData
-        })
-      })
-    }
-  }, [isSignIned])
-
   return {
     user,
     isSignIned,
